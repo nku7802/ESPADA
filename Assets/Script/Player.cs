@@ -28,6 +28,9 @@ public class Player : MonoBehaviour
                 card.Move(new Vector3(xPositions[i], yPositions[i], 0), true);
                 card.Flip(true);
                 firsthandsIndex.Add(card, i);
+                print("ADD");
+                print("ADD");
+                print("ADD");
                 return true;
             }
         }
