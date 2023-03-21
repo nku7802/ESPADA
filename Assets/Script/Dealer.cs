@@ -11,8 +11,6 @@ public class Dealer : MonoBehaviour
     [SerializeField]
     private Player player;
 
-
-
     void Start()
     {
         CreateCard();
@@ -33,16 +31,32 @@ public class Dealer : MonoBehaviour
 
     private void ShareCard()
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 9; i++)
         {
             int randomIndex = Random.Range(0, cardList.Count);
             Card card = cardList[randomIndex];
                 
             card.selection = true;
-player.AddCard(card);
+            player.AddCard(card);
 
-cardList.Remove(card);
-        card.Flip(true);
+            cardList.Remove(card);
+            card.Flip(true);
+        }
+    }
 
-    }}
+    public void DrawCard()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            int randomIndex = Random.Range(0, cardList.Count);
+            Card card = cardList[randomIndex];
+
+            card.selection = true;
+            player.AddCard(card);
+
+            cardList.Remove(card);
+            card.Flip(true);
+
+        }
+    }
 }

@@ -6,13 +6,13 @@ using System.Linq;
 
 public class Player : MonoBehaviour
 {
-    public readonly float[] xPositions = new float[]{ -8f, -6f, -4f, -2f, 0f, 2f, 4f, 6f, 8f, 10f }; // 패의 X 포지션
-    public readonly float[] SelectxPositions = new float[]{ -4f, -2f, 0f, 2f, 4f };
-    public readonly float[] yPositions = new float[]{ -1f, -1f, -1f, -1f, -1f, -1f, -1f, -1f, -1f, -1f }; // 패의 Y 포지션
-    public List<Card> firsthands = new List<Card>(new Card[10]); // 10개의 카드를 저장하는 리스트
+    public readonly float[] xPositions = new float[]{ -8f, -6f, -4f, -2f, 0f, 2f, 4f, 6f, 8f}; // 패의 X 포지션
+    public readonly float[] SelectxPositions = new float[]{ -5f, -3.5f, -2f, -0.5f, 1f };
+    public readonly float[] yPositions = new float[]{ -4f, -4f, -4f, -4f, -4f, -4f, -4f, -4f, -4f}; // 패의 Y 포지션
+    public List<Card> firsthands = new List<Card>(new Card[9]); // 10개의 카드를 저장하는 리스트
     private Dictionary<Card, int> firsthandsIndex = new Dictionary<Card, int>();
     public List<Card> selectedhands = new List<Card>(new Card[5]); // 크기를 5로 고정
-
+    public List<UnitCard> unithands = new List<UnitCard>(new UnitCard[3]);
 
     // public List<Card> 
     [SerializeField]
@@ -28,9 +28,6 @@ public class Player : MonoBehaviour
                 card.Move(new Vector3(xPositions[i], yPositions[i], 0), true);
                 card.Flip(true);
                 firsthandsIndex.Add(card, i);
-                print("ADD");
-                print("ADD");
-                print("ADD");
                 return true;
             }
         }
@@ -53,8 +50,7 @@ public class Player : MonoBehaviour
                 
                 // selectedhands로 넣어보기 시도
                 bool success = AddSelectedHands(card);
-                if(success)
-                    firsthands[i] = null;   // 잘 들어갔으면, firsthands애서 제거
+                if(success) firsthands[i] = null;   // 잘 들어갔으면, firsthands애서 제거
 
                 break;
             }
@@ -62,7 +58,7 @@ public class Player : MonoBehaviour
 
         for (int i = 0; i < 5; i++)
         {
-            Vector2 currentCardPosition = new Vector2(SelectxPositions[i], -3f);
+            Vector2 currentCardPosition = new Vector2(SelectxPositions[i], -1f);
             Vector2 currentMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             float distanceToCurrent = Vector2.Distance(currentMousePosition, currentCardPosition);
 
@@ -87,13 +83,38 @@ public class Player : MonoBehaviour
             if(selectedhands[i] != null) continue;
 
             selectedhands[i] = card;
-            card.Move(new Vector3(SelectxPositions[i], -3f));
+            card.Move(new Vector3(SelectxPositions[i], -1f));
             return true;
         }
 
         return false;   // 넣을 자리 없음
     }
+    
+    public void OnClickButton()
+    {
+        if (selectedhands[0] != null && selectedhands[1] != null && selectedhands[2] != null && selectedhands[3] != null && selectedhands[4] != null)
+        {
+            // 리스트 안에 있는 모든 게임 오브젝트를 파괴합니다.
+foreach (Card card in selectedhands)
+{
+    Destroy(card.gameObject);
+}
 
+// 리스트를 비웁니다.
+selectedhands = new List<Card>();
+selectedhands.Add(null); 
+selectedhands.Add(null); 
+selectedhands.Add(null); 
+selectedhands.Add(null); 
+selectedhands.Add(null); 
+
+
+
+dealer.DrawCard();
+
+            
+        }
+    }
 
     public enum HandRank
     {
@@ -203,7 +224,7 @@ public class Player : MonoBehaviour
             }
             else if (isFlush && isStraight)
             {
-                return $"Straight Flush: {{{GetSuitName(hand[4].Shape)} Flush";
+                return $"Straight Flush: {GetSuitName(hand[4].Shape)} Flush";
             }
             else if (isFlush)
             {

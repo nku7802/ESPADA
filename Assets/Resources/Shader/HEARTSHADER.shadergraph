@@ -1390,9 +1390,9 @@
     "m_ShaderOutputName": "MaskColor",
     "m_StageCapability": 3,
     "m_Value": {
-        "x": 0.7529412508010864,
+        "x": 0.9411765336990356,
         "y": 0.0,
-        "z": 0.16470588743686677
+        "z": 0.2039215862751007
     },
     "m_DefaultValue": {
         "x": 0.0,
