@@ -5,9 +5,9 @@ using UnityEngine;
 public class Tooltip : MonoBehaviour
 {
     private Sprite newSprite;
-        private static Tooltip instance;
+    private static Tooltip instance;
 
-        private SpriteRenderer spriteRenderer;
+    private SpriteRenderer spriteRenderer;
         
         private void Awake() 
         {

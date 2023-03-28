@@ -17,19 +17,19 @@ public class Dealer : MonoBehaviour
         ShareCard();
     }
 
-    private void CreateCard() 
+    public void CreateCard() 
     {
         for (int s = 1; s <= 4; s++) {
             for(int i = 1; i < 14; i ++) 
             {
-                Card card = Instantiate<Card>(cardPrefab, new Vector3(10,2,0), Quaternion.identity); 
+                Card card = Instantiate<Card>(cardPrefab, new Vector3(12f,-3.5f,0), Quaternion.identity); 
                 card.Init((CardShape)s, i);
                 cardList.Add(card); 
             }
         }
     }
 
-    private void ShareCard()
+    public void ShareCard()
     {
         for (int i = 0; i < 9; i++)
         {

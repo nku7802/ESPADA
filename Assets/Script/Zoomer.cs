@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Zoomer : MonoBehaviour
 {
-private static Zoomer instance;
-private static Renderer renderer;
+    private static Zoomer instance;
+    private static Renderer renderer;
 
     private SpriteRenderer spriteRenderer;
     
@@ -14,14 +14,15 @@ private static Renderer renderer;
     {
         instance = this;
         spriteRenderer = GetComponent<SpriteRenderer>();
-         renderer = GetComponent<Renderer>();
+        renderer = GetComponent<Renderer>();
     }
 
-    public static void SetSprite(Sprite cardSprite)  {
+    public static void SetSprite(Sprite cardSprite)  
+    {
         instance.spriteRenderer.sprite = cardSprite;    
     }
 
-      public static void SetMaterial(Material material)
+    public static void SetMaterial(Material material)
     {
         if (renderer != null)
         {

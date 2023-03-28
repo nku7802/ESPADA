@@ -47,7 +47,7 @@ public class Card : MonoBehaviour
         Sprite newSprite = Resources.Load<Sprite>($"Cards/{spriteName}");
 
         string materialName = $"{this.number}_of_{this.shape.ToString().ToLower()}s";
-        Material newMaterial = Resources.Load<Material>($"Shader/{materialName}");
+        Material newMaterial = Resources.Load<Material>($"CardShader/{materialName}");
 
         if (newSprite == null)
         {
@@ -103,7 +103,7 @@ public class Card : MonoBehaviour
         }
 
         Sprite newSprite = Resources.Load<Sprite>($"Cards/{spriteName}");
-        Material newMaterial = Resources.Load<Material>($"Shader/{materialName}");
+        Material newMaterial = Resources.Load<Material>($"CardShader/{materialName}");
 
         spriteRenderer.sprite = newSprite;
         spriteRenderer.material = newMaterial;
@@ -144,7 +144,7 @@ public class Card : MonoBehaviour
         transform.localScale = new Vector3(1, 1, 1);
         Zoomer.SetSprite(null);
         spriteRenderer.enabled = true;
-        Zoomer.SetMaterial(Resources.Load<Material>("Shader/Sprite-Lit-Default"));
+        Zoomer.SetMaterial(Resources.Load<Material>("CardShader/Sprite-Lit-Default"));
     }
 
     public Material GetMaterial() // Material 변경
